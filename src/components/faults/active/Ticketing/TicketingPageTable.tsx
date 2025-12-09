@@ -4,9 +4,7 @@ import {
   MaterialReactTable,
   MRT_ColumnDef,
 } from 'material-react-table';
-import * as XLSX from 'xlsx';
 import { useSnackbar } from '../../../common/SnackbarProvider';
-import { DynamicTableRow } from '../../../../store/types';
 import LoadingBox from '../../../common/LoadingBox';
 
 interface CommonTableProps {

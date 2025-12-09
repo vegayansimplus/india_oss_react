@@ -8,7 +8,7 @@ import axiosClient from '../../utils/axiosData/axioxClient';
 import { FETCH_TICKETING_TABLE_DATA } from '../../utils/axiosData/apis';
 import { DynamicTableRow } from '../../store/types';
 import DateTimeRangeCompact from '../../components/common/DateTimeRangeCompact';
-import { getNow, getYesterday } from '../../components/common/CurrentDateTimeOneDayDiff';
+import { getNow, getOneHourAgo } from '../../components/common/CurrentDateTimeOneDayDiff';
 import dayjs from 'dayjs';
 
 import TicketingPageTable from '../../components/faults/active/Ticketing/TicketingPageTable';
@@ -207,10 +207,10 @@ export default function TicketingPageTest() {
   const [popUpDataRow, setPopUpDataRow] = useState<DynamicTableRow | null>(null);
   const [viewGraph, setViewGraph] = useState<boolean>(false);
 
-  const today = getNow();
-  const yesterday = getYesterday();
-  const [fromDate, setFromDate] = useState<Date | null>(yesterday);
-  const [toDate, setToDate] = useState<Date | null>(today);
+  const now = getNow();
+  const oneHourAgo = getOneHourAgo();
+  const [fromDate, setFromDate] = useState<Date | null>(oneHourAgo);
+  const [toDate, setToDate] = useState<Date | null>(now);
 
   // API load
   const fetchTicketingData = async () => {
