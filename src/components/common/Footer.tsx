@@ -1,4 +1,4 @@
-import logo from '../../../public/logo_vega.png'
+import logo from '../../assets/logo_vega.png'
 
 const Footer = () => {
     return (

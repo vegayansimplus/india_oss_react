@@ -43,6 +43,7 @@ function App() {
                   <Route path="ciena/channel-details-report" element={<ChannelDetailsReport />} />
                   <Route path="nfmt/device-details-report" element={<NfmtDeviceDetailsReport />} />
                   <Route path="nfmt/equipment-details-report" element={<NfmtEquipmentDetailsReport />} />
+                  
                 </Route>
               </Route>
               {/* unknown url → / */}

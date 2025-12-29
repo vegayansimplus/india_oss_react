@@ -37,7 +37,8 @@ import axios from "axios";
 export const baseURL_WS: string = "http://10.27.144.225:8081";
 
 // export const baseURL: string = "http://localhost:8080";
-export const baseURL: string = "http://10.27.144.225";
+// export const baseURL: string = "http://10.27.144.225:8082";
+export const baseURL: string = "https://ngossprod.lightstorm.in";
 
 const axiosClient = axios.create({
   baseURL: baseURL,

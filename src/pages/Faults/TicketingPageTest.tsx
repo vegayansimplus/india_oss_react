@@ -82,7 +82,7 @@ const normalizeTicketState = (s?: string | null) => {
 
 
 const dtoToRow = (dto: any): DynamicTableRow => ({
-  Adapter: dto.clientType ?? '',
+  Adapter:  dto.clientType ?? '',
   Severity: mapSeverity(dto.severity),
   Family: dto.family ?? '',
   'VegayanOSS Ticket': dto.internalTicketId ?? '',
@@ -206,6 +206,8 @@ export default function TicketingPageTest() {
 
   const [popUpDataRow, setPopUpDataRow] = useState<DynamicTableRow | null>(null);
   const [viewGraph, setViewGraph] = useState<boolean>(false);
+  const [hasFetchedOnce, setHasFetchedOnce] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const now = getNow();
   const oneHourAgo = getOneHourAgo();
@@ -215,6 +217,7 @@ export default function TicketingPageTest() {
   // API load
   const fetchTicketingData = async () => {
     try {
+      setIsLoading(true);
       const formattedFrom = dayjs(fromDate).format('YYYY-MM-DD HH:mm:ss');
       const formattedTo = dayjs(toDate).format('YYYY-MM-DD HH:mm:ss');
 
@@ -230,6 +233,10 @@ export default function TicketingPageTest() {
       }
     } catch (e) {
       console.error(e);
+    }
+    finally {
+      setIsLoading(false);
+      setHasFetchedOnce(true);
     }
   };
 
@@ -292,6 +299,7 @@ export default function TicketingPageTest() {
     'Family',
     'VegayanOSS Ticket',
     'FS Ticket',
+    'Ticket Description',
     'Ticket State',
     'Alarm Received Time',
     'Alarm Cleared Time',
@@ -306,7 +314,7 @@ export default function TicketingPageTest() {
     'Severity',
     'IP Address',
     'Symptom Type',
-    'Ticket Description',
+    
     'Last Modify Date',
   ];
 
@@ -421,6 +429,8 @@ export default function TicketingPageTest() {
               dataObjects={finalFilteredData}
               pageSize={100}
               viewGraph={viewGraph}
+              isLoading={isLoading}
+              hasFetchedOnce={hasFetchedOnce}
               setViewGraph={setViewGraph}
               onRowClick={(row) => {
                 setPopUpDataRow(row);
@@ -431,6 +441,7 @@ export default function TicketingPageTest() {
               drawerOpen={open}
               drawerWidthCss={drawerWidth}
             />
+            
           </Grid>
           <TicketingDetailsDialog
             open={openModel}

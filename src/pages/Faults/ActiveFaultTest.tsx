@@ -344,7 +344,8 @@ export default function ActiveFaultTest() {
   // WebSocket live updates
   useEffect(() => {
     let isActive = true;
-    const socket = new SockJS(`${baseURL_WS}/ws`);
+    // const socket = new SockJS(`${baseURL_WS}/ws`);
+    const socket = new SockJS("/ws");
     const client = new Client({
       webSocketFactory: () => socket as any,
       reconnectDelay: 5000,
