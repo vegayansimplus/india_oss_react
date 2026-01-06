@@ -49,7 +49,7 @@ const getRecvTime = (row: Record<string, any>) =>
 const getDeviceName = (row: Record<string, any>) =>
   pick(row, ['Device Name', 'Node Name', 'nodename', 'NodeName']) ?? '—';
 
-/** ✅ NOW returns IST time string in format (YYYY-MM-DD HH:mm:ss) */
+/**  NOW returns IST time string in format (YYYY-MM-DD HH:mm:ss) */
 const nowStringIST = () => {
   const d = new Date();
 
@@ -80,7 +80,7 @@ const nowStringIST = () => {
 const TS_REGEX = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/;
 const validTS = (s: string) => TS_REGEX.test(s);
 
-/** ✅ Parse "YYYY-MM-DD HH:mm:ss" as IST (Asia/Kolkata) Date */
+/** Parse "YYYY-MM-DD HH:mm:ss" as IST (Asia/Kolkata) Date */
 const toDateIST = (s?: string) => {
   if (!s || !validTS(s)) return undefined;
   const [datePart, timePart] = s.split(' ');
@@ -102,7 +102,7 @@ const AcknowledgeTrap: React.FC<AcknowledgeTrapProps> = ({
   const total = useMemo(() => selectedrows?.length ?? 0, [selectedrows]);
 
   const [ackMsg, setAckMsg] = useState('Acknowledging trap');
-  const [ackTime, setAckTime] = useState(nowStringIST()); // ✅ IST by default
+  const [ackTime, setAckTime] = useState(nowStringIST()); //  IST by default
   const [autoNow, setAutoNow] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
@@ -206,10 +206,10 @@ const AcknowledgeTrap: React.FC<AcknowledgeTrapProps> = ({
         trapID: trapID,
         ackFlag: 'ACK',
         ackUser: username,
-        ackTime: ackTime,           // ✅ IST string
+        ackTime: ackTime,           //  IST string
         ackMsg: ackMsg,
         adapaterName: adapaterName,
-        dbinsertiontime: ackTime,   // ✅ IST string
+        dbinsertiontime: ackTime,   // IST string
         vendor: vendor,
       };
 
@@ -287,7 +287,7 @@ const AcknowledgeTrap: React.FC<AcknowledgeTrapProps> = ({
             fullWidth
             sx={{ height: '40px' }}
             onClick={() => {
-              setAckTime(nowStringIST()); // ✅ IST Now
+              setAckTime(nowStringIST()); //  IST Now
               setAutoNow(true);
             }}
           >
