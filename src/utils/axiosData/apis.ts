@@ -42,7 +42,7 @@ export const FETCH_INVENTORY_NFMT_EQUIPMENT_REPORT_DATA= `/v1/nfmt/equipment-rep
 export const FETCH_GRAPH_DATA_API=(adapName:string,st:string,ed:string)=> `/v1/faultbrowser/active-traps/graphtrend?AdapterName=${adapName}&dateStart=${st}&dateEnd=${ed}`
 
 //------------------------------------------------------------------------------------
-export const AUTO_TT_ALARMS_API ='http://10.27.144.225:8080/indiabackend/v1/faultbrowser/auto-tt-alarms';
+// export const AUTO_TT_ALARMS_API ='http://10.27.144.225:8080/indiabackend/v1/faultbrowser/auto-tt-alarms';
 
 
 

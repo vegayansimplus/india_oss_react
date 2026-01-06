@@ -1129,62 +1129,62 @@ const ActiveFaultsTableForSidebar: React.FC<CommonTableProps> = ({
   };
 
   //  Auto-TT alarms download handler
-  const handleDownloadAutoTtAlarms = async () => {
-    try {
-      setDownloadingAutoTt(true);
+  // const handleDownloadAutoTtAlarms = async () => {
+  //   try {
+  //     setDownloadingAutoTt(true);
 
-      // choose adapters: filter set > adapters from rows > fallback
-      const adaptersFromFilter = Array.from(adaptersForFilter);
-      const adaptersFromRows = Array.from(
-        new Set(rows.map((r) => normalize(r['Adapter'])).filter(Boolean))
-      );
+  //     // choose adapters: filter set > adapters from rows > fallback
+  //     const adaptersFromFilter = Array.from(adaptersForFilter);
+  //     const adaptersFromRows = Array.from(
+  //       new Set(rows.map((r) => normalize(r['Adapter'])).filter(Boolean))
+  //     );
 
-      const adapters =
-        adaptersFromFilter.length > 0
-          ? adaptersFromFilter
-          : adaptersFromRows.length > 0
-            ? adaptersFromRows
-            : ['MCP', 'NFMT'];
+  //     const adapters =
+  //       adaptersFromFilter.length > 0
+  //         ? adaptersFromFilter
+  //         : adaptersFromRows.length > 0
+  //           ? adaptersFromRows
+  //           : ['MCP', 'NFMT'];
 
-      const adapterName = adapters.join(',');
-      const url = `${AUTO_TT_ALARMS_API}?adapterName=${adapterName}`;
-      const response = await axiosClient.get(url);
-      const data = response?.data;
+  //     const adapterName = adapters.join(',');
+  //     const url = `${AUTO_TT_ALARMS_API}?adapterName=${adapterName}`;
+  //     const response = await axiosClient.get(url);
+  //     const data = response?.data;
 
-      if (!Array.isArray(data) || data.length === 0) {
-        showMessage('No data received from Auto-TT API.', 'warning');
-        return;
-      }
+  //     if (!Array.isArray(data) || data.length === 0) {
+  //       showMessage('No data received from Auto-TT API.', 'warning');
+  //       return;
+  //     }
 
-      // shape excel columns
-      const excelRows = data.map((r: any) => ({
-        Adapter: r.Adapter ?? '',
-        Alarm: r.alarm ?? '',
-        Treated: r.Treated ?? '',
-        Family: r.family ?? '',
-        Persistence_in_sec: r.Persistence_in_sec ?? '',
-        Short_period: r.Short_period ?? '',
-        Short_repetition: r.Short_repetition ?? '',
-      }));
+  //     // shape excel columns
+  //     const excelRows = data.map((r: any) => ({
+  //       Adapter: r.Adapter ?? '',
+  //       Alarm: r.alarm ?? '',
+  //       Treated: r.Treated ?? '',
+  //       Family: r.family ?? '',
+  //       Persistence_in_sec: r.Persistence_in_sec ?? '',
+  //       Short_period: r.Short_period ?? '',
+  //       Short_repetition: r.Short_repetition ?? '',
+  //     }));
 
-      const ws = XLSX.utils.json_to_sheet(excelRows);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'AutoTT_Alarms');
+  //     const ws = XLSX.utils.json_to_sheet(excelRows);
+  //     const wb = XLSX.utils.book_new();
+  //     XLSX.utils.book_append_sheet(wb, ws, 'AutoTT_Alarms');
 
-      const fileName = `AutoTT_Alarms_${adapterName}_${new Date()
-        .toISOString()
-        .slice(0, 10)}.xlsx`;
+  //     const fileName = `AutoTT_Alarms_${adapterName}_${new Date()
+  //       .toISOString()
+  //       .slice(0, 10)}.xlsx`;
 
-      XLSX.writeFile(wb, fileName);
+  //     XLSX.writeFile(wb, fileName);
 
-      showMessage('Auto-TT alarms Excel downloaded.', 'success');
-    } catch (err: any) {
-      console.error(err);
-      showMessage(err?.message || 'Failed to download Auto-TT alarms.', 'error');
-    } finally {
-      setDownloadingAutoTt(false);
-    }
-  };
+  //     showMessage('Auto-TT alarms Excel downloaded.', 'success');
+  //   } catch (err: any) {
+  //     console.error(err);
+  //     showMessage(err?.message || 'Failed to download Auto-TT alarms.', 'error');
+  //   } finally {
+  //     setDownloadingAutoTt(false);
+  //   }
+  // };
 
   // MRT columns – memoized
   const columns: MRT_ColumnDef<any>[] = useMemo(
@@ -1630,7 +1630,7 @@ const ActiveFaultsTableForSidebar: React.FC<CommonTableProps> = ({
                     </Button>
 
                     {/*  Download uses API and xlsx */}
-                    <Button
+                    {/* <Button
                       onClick={handleDownloadAutoTtAlarms}
                       // disabled={downloadingAutoTt}
                       sx={{
@@ -1649,7 +1649,7 @@ const ActiveFaultsTableForSidebar: React.FC<CommonTableProps> = ({
                       }}
                     >
                       {downloadingAutoTt ? 'Auto TT' : 'Auto TT'}
-                    </Button>
+                    </Button> */}
 
                     <Box sx={{ fontSize: '1.0vw', fontWeight: '700', marginLeft: 9 }}>
                       INDIA Active Faults
